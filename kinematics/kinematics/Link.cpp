@@ -96,7 +96,7 @@ namespace kinematics {
 		else {
 			painter.setPen(QPen(QColor(90, 90, 90), 3));
 		}
-		painter.setBrush(QBrush(QColor(192, 192, 192)));
+		painter.setBrush(QBrush(QColor(192, 192, 192, 64)));
 		QPolygon polygon;
 		for (int i = 0; i < joints.size(); ++i) {
 			polygon.append(QPoint(origin.x() + joints[i]->pos.x * scale, origin.y() - joints[i]->pos.y * scale));
