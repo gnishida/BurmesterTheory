@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+This example is based on the examle used in the paper,
+"Advanced Mechanism Design: Analysis and Synthesis" and 
+"Determining Burmester Points from the Analysis of a Planar Platform".
+-->
+<poses author="Gen Nishida" version="1.0" date="6/21/2017">
+	<pose>
+		<point x="0.0" y="0.0"/>
+		<point x="1.0" y="0.0"/>
+	</pose>
+	<pose>
+		<point x="1.5" y="0.8"/>
+		<point x="2.4848" y="0.973648"/>
+	</pose>
+	<pose>
+		<point x="1.6" y="1.5"/>
+		<point x="2.5396926" y="1.842"/>
+	</pose>
+	<pose>
+		<point x="2.0" y="3.0"/>
+		<point x="2.5" y="3.866"/>
+	</pose>
+</poses>

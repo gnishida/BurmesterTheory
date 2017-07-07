@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+This example is based on the examle used in the paper,
+"The Pole Triangle Burmester Theory And Order And Branching Problems".
+-->
+<poses author="Gen Nishida" version="1.0" date="6/21/2017">
+	<pose>
+		<point x="1.2" y="4.15"/>
+		<point x="2.2" y="4.15"/>
+	</pose>
+	<pose>
+		<point x="1.64" y="4.67"/>
+		<point x="2.2" y="5.45"/>
+	</pose>
+	<pose>
+		<point x="0.9" y="2.35"/>
+		<point x="0" y="2.73"/>
+	</pose>
+	<pose>
+		<point x="4" y="0.7"/>
+		<point x="3.3" y="0"/>
+	</pose>
+</poses>

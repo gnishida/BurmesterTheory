@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+This example is based on the examle used in the book,
+"Geometric Methods of Synthesis with Four Accuracy Points".
+-->
+<poses author="Gen Nishida" version="1.0" date="6/21/2017">
+	<pose>
+		<point x="4.2" y="1.2"/>
+		<point x="4.52" y="1.98"/>
+	</pose>
+	<pose>
+		<point x="1.52" y="1.02"/>
+		<point x="2.32" y="1.3"/>
+	</pose>
+	<pose>
+		<point x="0.6" y="3.52"/>
+		<point x="1.2" y="2.85"/>
+	</pose>
+	<pose>
+		<point x="0.63" y="1.3"/>
+		<point x="1.4" y="1.13"/>
+	</pose>
+</poses>

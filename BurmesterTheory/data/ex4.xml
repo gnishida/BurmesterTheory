@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+This example is based on the examle used in the paper,
+"Elimination of the Branch Problem in Graphical Burmester
+ Mechanism Synthesis for Four Finitely Separated Positions".
+-->
+<poses author="Gen Nishida" version="1.0" date="6/21/2017">
+	<pose>
+		<point x="0.8765" y="1.2882"/>
+		<point x="1.735" y="1.553"/>
+	</pose>
+	<pose>
+		<point x="0" y="1"/>
+		<point x="0" y="2"/>
+	</pose>
+	<pose>
+		<point x="0.4706" y="0.6"/>
+		<point x="0.7765" y="1.447"/>
+	</pose>
+	<pose>
+		<point x="0.7647" y="0.4412"/>
+		<point x="1.4765" y="1"/>
+	</pose>
+</poses>

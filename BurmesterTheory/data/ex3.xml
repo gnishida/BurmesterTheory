@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!--
+This example is based on the examle used in the paper,
+"Marking Points for Crank-Rocker Linkage on the Centerpoint Curve".
+-->
+<poses author="Gen Nishida" version="1.0" date="6/21/2017">
+	<pose>
+		<point x="0.6" y="0.72"/>
+		<point x="0.96" y="2.235"/>
+	</pose>
+	<pose>
+		<point x="1.42" y="1.562"/>
+		<point x="2.423" y="2.76"/>
+	</pose>
+	<pose>
+		<point x="2.5" y="2.53"/>
+		<point x="3.68" y="3.44"/>
+	</pose>
+	<pose>
+		<point x="3.94" y="2.42"/>
+		<point x="5.3" y="1.75"/>
+	</pose>
+</poses>
