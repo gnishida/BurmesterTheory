@@ -121,16 +121,13 @@ namespace kinematics {
 
 	bool polygonPolygonIntersection(const std::vector<glm::dvec2>& polygon1, const std::vector<glm::dvec2>& polygon2) {
 		// make the polygons closed
-		std::vector<glm::dvec2> closed_polygon1 = polygon1;
-		if (closed_polygon1.size() == 0) return false;
-		if (closed_polygon1.front() != closed_polygon1.back()) closed_polygon1.push_back(closed_polygon1.front());
-		std::vector<glm::dvec2> closed_polygon2 = polygon2;
-		if (closed_polygon2.size() == 0) return false;
-		if (closed_polygon2.front() != closed_polygon2.back()) closed_polygon2.push_back(closed_polygon2.front());
+		polygon poly1 = polygon1;
+		boost::geometry::correct(poly1);
+		polygon poly2 = polygon2;
+		boost::geometry::correct(poly2);
 
 		std::deque<polygon> output;
-		boost::geometry::intersection(closed_polygon1, closed_polygon2, output);
-
+		boost::geometry::intersection(poly1, poly2, output);
 		if (output.size() > 0) return true;
 		else return false;
 	}
