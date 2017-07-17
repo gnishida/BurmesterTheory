@@ -27,11 +27,11 @@ namespace kinematics {
 		pos = center + glm::dvec2(cos(phase), sin(phase)) * radius;
 	}
 
-	void Gear::draw(QPainter& painter, const QPoint& origin, float scale) {
+	void Gear::draw(QPainter& painter, const QPointF& origin, float scale) {
 		painter.save();
 		painter.setPen(QPen(QColor(0, 0, 0), 1));
 		painter.setBrush(QBrush(QColor(255, 255, 255, 0)));
-		painter.drawEllipse(QPoint(center.x, center.y), 5, 5);
+		painter.drawEllipse(QPoint(origin.x() + center.x * scale, origin.y() - center.y * scale), 5, 5);
 
 		painter.setBrush(QBrush(QColor(255, 255, 255)));
 

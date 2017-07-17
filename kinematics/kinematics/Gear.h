@@ -17,7 +17,7 @@ namespace kinematics {
 		Gear(int id, bool ground, const glm::dvec2& pos, double radius, double speed, double phase);
 		Gear(QDomElement& node);
 
-		void draw(QPainter& painter, const QPoint& origin, float scale);
+		void draw(QPainter& painter, const QPointF& origin, float scale);
 		void stepForward(double step_size);
 		bool forwardKinematics();
 	};

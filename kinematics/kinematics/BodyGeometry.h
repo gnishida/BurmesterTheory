@@ -21,7 +21,7 @@ namespace kinematics {
 		BodyGeometry(boost::shared_ptr<Joint> pivot1, boost::shared_ptr<Joint> pivot2) : pivot1(pivot1), pivot2(pivot2) {}
 
 		std::vector<glm::dvec2> getActualPoints();
-		void draw(QPainter& painter, const QPoint& origin, float scale);
+		void draw(QPainter& painter, const QPointF& origin, float scale);
 	};
 
 }

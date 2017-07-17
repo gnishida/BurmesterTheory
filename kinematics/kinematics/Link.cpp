@@ -87,7 +87,7 @@ namespace kinematics {
 		return mat * glm::dvec3(original_shape[joint_id], 1);
 	}
 
-	void Link::draw(QPainter& painter, const QPoint& origin, float scale) {
+	void Link::draw(QPainter& painter, const QPointF& origin, float scale) {
 		painter.save();
 
 		if (driver) {

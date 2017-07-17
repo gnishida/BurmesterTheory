@@ -26,7 +26,7 @@ namespace kinematics {
 		Joint();
 
 		void rotate(const glm::dvec2& rotation_center, double angle);
-		virtual void draw(QPainter& painter, const QPoint& origin, float scale) = 0;
+		virtual void draw(QPainter& painter, const QPointF& origin, float scale) = 0;
 		virtual void stepForward(double step_size) = 0;
 		virtual bool forwardKinematics() = 0;
 	};

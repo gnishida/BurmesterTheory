@@ -19,7 +19,7 @@ namespace kinematics {
 		pos.y = node.attribute("y").toDouble();
 	}
 
-	void PinJoint::draw(QPainter& painter, const QPoint& origin, float scale) {
+	void PinJoint::draw(QPainter& painter, const QPointF& origin, float scale) {
 		painter.save();
 		painter.setPen(QPen(QColor(0, 0, 0), 1));
 		painter.setBrush(QBrush(QColor(255, 255, 255)));

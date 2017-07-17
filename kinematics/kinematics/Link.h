@@ -30,7 +30,7 @@ namespace kinematics {
 		glm::dmat3x2 getTransformMatrix();
 		glm::dvec2 transformByDeterminedJoints(int joint_id);
 		glm::dvec2 forwardKinematics(glm::dvec2& start_pos);
-		void draw(QPainter& painter, const QPoint& origin, float scale);
+		void draw(QPainter& painter, const QPointF& origin, float scale);
 	};
 
 }

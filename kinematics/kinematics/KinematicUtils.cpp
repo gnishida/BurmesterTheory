@@ -2,6 +2,14 @@
 
 namespace kinematics {
 
+	double genRand() {
+		return rand() / (float(RAND_MAX) + 1);
+	}
+
+	double genRand(double a, double b) {
+		return genRand() * (b - a) + a;
+	}
+
 	/**
 	 * Find the intersection on the right if you look at cener 2 from center 1.
 	 *     c2
@@ -176,6 +184,25 @@ namespace kinematics {
 		return true;
 	}
 
+	glm::dvec2 circleCenterFromThreePoints(const glm::dvec2& a, const glm::dvec2& b, const glm::dvec2& c) {
+		glm::dvec2 m1 = (a + b) * 0.5;
+		glm::dvec2 v1 = b - a;
+		v1 /= glm::length(v1);
+		glm::dvec2 h1(-v1.y, v1.x);
+
+		glm::dvec2 m2 = (b + c) * 0.5;
+		glm::dvec2 v2 = c - b;
+		v2 /= glm::length(v2);
+		glm::dvec2 h2(-v2.y, v2.x);
+
+		glm::dvec2 intPt;
+		if (!lineLineIntersection(m1, h1, m2, h2, intPt)) {
+			throw "No circle center";
+		}
+
+		return intPt;
+	}
+
 	/**
 	* Given three points, a, b, and c, find the coordinates of point p1, such that
 	* length a-p1 is l0, length b-p2 is l1, length c-p3 is l2, length p1-p2 is r0, length p1-p3 is r1, length p2-p3 is r2.
@@ -231,6 +258,12 @@ namespace kinematics {
 		double min_dist = std::numeric_limits<double>::max();
 		double best_theta;
 
+		// calculate angle sign of b-prev_pos2-prev_pos
+		bool prev_sign2 = crossProduct(prev_pos2 - b, prev_pos - prev_pos2) >= 0 ? true : false;
+
+		// calculate angle sign of c-prev_pos3-prev_pos
+		bool prev_sign3 = crossProduct(prev_pos3 - c, prev_pos - prev_pos3) >= 0 ? true : false;
+
 		for (double theta = theta0; theta <= theta1; theta += delta_theta) {
 			glm::dvec2 pos(a.x + l0 * cos(theta), a.y + l0 * sin(theta));
 			if (glm::length(pos - prev_pos) > l0 * 0.5) continue;
@@ -241,17 +274,25 @@ namespace kinematics {
 				glm::dvec2 P2a = circleCircleIntersection(pos, r1, c, l2);// , prev_pos3);
 				glm::dvec2 P2b = circleCircleIntersection(c, l2, pos, r1);
 
+				// calculate angle sign of b-P1-pos
+				bool sign2a = crossProduct(P1a - b, pos - P1a) >= 0 ? true : false;
+				bool sign2b = crossProduct(P1b - b, pos - P1b) >= 0 ? true : false;
+
+				// calculate angle sign of c-P2-pos
+				bool sign3a = crossProduct(P2a - c, pos - P2a) >= 0 ? true : false;
+				bool sign3b = crossProduct(P2b - c, pos - P2b) >= 0 ? true : false;
+
 				double dist = std::numeric_limits<double>::max();
-				if (glm::length(P1a - prev_pos2) < l1 * 0.5 && glm::length(P2a - prev_pos3) < l2 * 0.5) {
+				if (glm::length(P1a - prev_pos2) < l1 * 0.5 && glm::length(P2a - prev_pos3) < l2 * 0.5 && sign2a == prev_sign2 || sign3a == prev_sign3) {
 					dist = std::min(dist, std::abs(glm::length(P1a - P2a) - r2));
 				}
-				if (glm::length(P1a - prev_pos2) < l1 * 0.5 && glm::length(P2b - prev_pos3) < l2 * 0.5) {
+				if (glm::length(P1a - prev_pos2) < l1 * 0.5 && glm::length(P2b - prev_pos3) < l2 * 0.5 && sign2a == prev_sign2 || sign3b == prev_sign3) {
 					dist = std::min(dist, std::abs(glm::length(P1a - P2b) - r2));
 				}
-				if (glm::length(P1b - prev_pos2) < l1 * 0.5 && glm::length(P2a - prev_pos3) < l2 * 0.5) {
+				if (glm::length(P1b - prev_pos2) < l1 * 0.5 && glm::length(P2a - prev_pos3) < l2 * 0.5 && sign2b == prev_sign2 || sign3a == prev_sign3) {
 					dist = std::min(dist, std::abs(glm::length(P1b - P2a) - r2));
 				}
-				if (glm::length(P1b - prev_pos2) < l1 * 0.5 && glm::length(P2b - prev_pos3) < l2 * 0.5) {
+				if (glm::length(P1b - prev_pos2) < l1 * 0.5 && glm::length(P2b - prev_pos3) < l2 * 0.5 && sign2b == prev_sign2 || sign3b == prev_sign3) {
 					dist = std::min(dist, std::abs(glm::length(P1b - P2b) - r2));
 				}
 
@@ -277,9 +318,13 @@ namespace kinematics {
 		return p + (u - norm_v * glm::dot(u, norm_v)) * 2.0;
 	}
 
+	double crossProduct(const glm::dvec2& v1, const glm::dvec2& v2) {
+		return v1.x * v2.y - v1.y * v2.x;
+	}
+
 	/**
-	* Given that he point p1 goes to p2, and the point q1 goes to q2,
-	* return the transformation matrix for this.
+	* Given that point p1 goes to p2, and the point q1 goes to q2,
+	* return the matrix for this transformation.
 	*/
 	glm::dmat3x3 affineTransform(const glm::dvec2& p1, const glm::dvec2& p2, const glm::dvec2& q1, const glm::dvec2& q2) {
 		double theta1 = atan2(q1.y - p1.y, q1.x - p1.x);

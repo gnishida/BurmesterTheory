@@ -385,7 +385,7 @@ namespace kinematics {
 		return false;
 	}
 
-	void KinematicDiagram::draw(QPainter& painter, const QPoint& origin, float scale, bool show_bodies, bool show_links) const {
+	void KinematicDiagram::draw(QPainter& painter, const QPointF& origin, float scale, bool show_bodies, bool show_links) const {
 		if (show_bodies) {
 			for (int i = 0; i < bodies.size(); ++i) {
 				bodies[i]->draw(painter, origin, scale);

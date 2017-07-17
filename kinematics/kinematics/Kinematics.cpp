@@ -95,7 +95,7 @@ namespace kinematics {
 		return diagram.isCollided();
 	}
 
-	void Kinematics::draw(QPainter& painter, const QPoint& origin, float scale) const {
+	void Kinematics::draw(QPainter& painter, const QPointF& origin, float scale) const {
 		diagram.draw(painter, origin, scale, show_bodies, show_links);
 	}
 

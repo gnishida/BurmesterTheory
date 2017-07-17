@@ -32,7 +32,7 @@ namespace kinematics {
 		return actual_points;
 	}
 
-	void BodyGeometry::draw(QPainter& painter, const QPoint& origin, float scale) {
+	void BodyGeometry::draw(QPainter& painter, const QPointF& origin, float scale) {
 		painter.save();
 
 		painter.setPen(QPen(QColor(0, 0, 0), 1));
