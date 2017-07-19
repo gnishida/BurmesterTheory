@@ -137,6 +137,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\kinematics\kinematics\BBox.cpp" />
     <ClCompile Include="..\kinematics\kinematics\BodyGeometry.cpp" />
     <ClCompile Include="..\kinematics\kinematics\Burmester.cpp" />
     <ClCompile Include="..\kinematics\kinematics\Gear.cpp" />
@@ -220,6 +221,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\kinematics\kinematics.h" />
+    <ClInclude Include="..\kinematics\kinematics\BBox.h" />
     <ClInclude Include="..\kinematics\kinematics\BodyGeometry.h" />
     <ClInclude Include="..\kinematics\kinematics\Burmester.h" />
     <ClInclude Include="..\kinematics\kinematics\Gear.h" />

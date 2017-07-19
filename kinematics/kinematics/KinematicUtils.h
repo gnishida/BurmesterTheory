@@ -7,6 +7,7 @@
 #include <boost/geometry/geometries/point.hpp>
 #include <boost/geometry/geometries/register/point.hpp>
 #include <boost/geometry/geometries/register/linestring.hpp>
+#include "BBox.h"
 
 namespace kinematics {
 
@@ -31,7 +32,10 @@ namespace kinematics {
 	glm::dmat3x3 affineTransform(const glm::dvec2& p1, const glm::dvec2& p2, const glm::dvec2& q1, const glm::dvec2& q2);
 	double crossProduct(const glm::dvec2& v1, const glm::dvec2& v2);
 
+	double area(const std::vector<glm::dvec2>& points);
 	bool withinPolygon(const std::vector<glm::dvec2>& points, const glm::dvec2& pt);
+	bool withinPolygon(const std::vector<std::vector<glm::dvec2>>& polygons, const glm::dvec2& pt);
+	BBox boundingBox(const std::vector<glm::dvec2>& points);
 
 	typedef std::vector<glm::dvec2> polygon;
 

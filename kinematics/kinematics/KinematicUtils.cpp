@@ -331,10 +331,37 @@ namespace kinematics {
 		return glm::dmat3x3({ cos(theta), sin(theta), 0, -sin(theta), cos(theta), 0, -p1.x * cos(theta) + p1.y * sin(theta) + p2.x, -p1.x * sin(theta) - p1.y * cos(theta) + p2.y, 1 });
 	}
 
+	double area(const std::vector<glm::dvec2>& points) {
+		polygon poly = points;
+		boost::geometry::correct(poly);
+		return boost::geometry::area(poly);
+	}
+
 	bool withinPolygon(const std::vector<glm::dvec2>& points, const glm::dvec2& pt) {
 		polygon poly = points;
 		boost::geometry::correct(poly);
 		return boost::geometry::within(pt, poly);
+	}
+
+	bool withinPolygon(const std::vector<std::vector<glm::dvec2>>& polygons, const glm::dvec2& pt) {
+		for (int i = 0; i < polygons.size(); i++) {
+			if (withinPolygon(polygons[i], pt)) return true;
+		}
+		return false;
+	}
+
+	BBox boundingBox(const std::vector<glm::dvec2>& points) {
+		double min_x = std::numeric_limits<double>::max();
+		double max_x = -std::numeric_limits<double>::max();
+		double min_y = std::numeric_limits<double>::max();
+		double max_y = -std::numeric_limits<double>::max();
+		for (int i = 0; i < points.size(); i++) {
+			min_x = std::min(min_x, points[i].x);
+			max_x = std::max(max_x, points[i].x);
+			min_y = std::min(min_y, points[i].y);
+			max_y = std::max(max_y, points[i].y);
+		}
+		return BBox(glm::dvec2(min_x, min_y), glm::dvec2(max_x, max_y));
 	}
 
 }

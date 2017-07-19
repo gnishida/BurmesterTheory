@@ -17,7 +17,7 @@ Canvas::Canvas(QWidget *parent) : QWidget(parent) {
 	origin = QPoint(0, height());
 	scale = 10.0;
 	animation_timer = NULL;
-	simulation_speed = 0.01;
+	collision_check = true;
 
 	linkage_type = -1;
 	grashofDefect = false;
@@ -192,24 +192,24 @@ void Canvas::stop() {
 }
 
 void Canvas::speedUp() {
-	simulation_speed *= 2;
+	kinematics.speedUp();
 }
 
 void Canvas::speedDown() {
-	simulation_speed *= 0.5;
+	kinematics.speedDown();
 }
 
 void Canvas::invertSpeed() {
-	simulation_speed = -simulation_speed;
+	kinematics.invertSpeed();
 }
 
 void Canvas::stepForward() {
 	if (animation_timer == NULL) {
 		try {
-			kinematics.stepForward(simulation_speed);
+			kinematics.stepForward(collision_check);
 		}
 		catch (char* ex) {
-			simulation_speed = -simulation_speed;
+			kinematics.invertSpeed();
 			std::cerr << "Animation is stopped by error:" << std::endl;
 			std::cerr << ex << std::endl;
 		}
@@ -220,10 +220,10 @@ void Canvas::stepForward() {
 void Canvas::stepBackward() {
 	if (animation_timer == NULL) {
 		try {
-			kinematics.stepForward(-simulation_speed);
+			kinematics.stepForward(collision_check);
 		}
 		catch (char* ex) {
-			simulation_speed = -simulation_speed;
+			kinematics.invertSpeed();
 			std::cerr << "Animation is stopped by error:" << std::endl;
 			std::cerr << ex << std::endl;
 		}
@@ -527,10 +527,10 @@ bool Canvas::checkBranchDefect() {
 
 void Canvas::animation_update() {
 	try {
-		kinematics.stepForward(simulation_speed);
+		kinematics.stepForward(collision_check);
 	}
 	catch (char* ex) {
-		simulation_speed = -simulation_speed;
+		kinematics.invertSpeed();
 		//stop();
 		std::cerr << "Animation is stopped by error:" << std::endl;
 		std::cerr << ex << std::endl;
